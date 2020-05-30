@@ -13,7 +13,6 @@ public class ScraperBbva {
 
     // Seteamos la página de destino y el elemento a scrapear, e inicializamos el array donde vamos a guardar las cotizaciones
     private final String TARGET_URL = "https://hb.bbv.com.ar/fnet/mod/inversiones/NL-dolareuro.jsp";
-    private double[] cotizaciones = new double[8];
     private byte count = 0;
 
     // Instanciamos objetos para el webdriver y las opciones
@@ -21,7 +20,8 @@ public class ScraperBbva {
     private FirefoxDriver driver = new FirefoxDriver(opcionesFirefox);
     private WebDriverWait espera = new WebDriverWait(driver, 30);
 
-    public void scrape() {
+    public double[] scrape() {
+        double[] cotizaciones = new double[8];
         // Let's go, es dificil armar un método para scrapear sin que quede tan procedural, pero bueno:
         driver.navigate().to(TARGET_URL);
 
@@ -37,10 +37,26 @@ public class ScraperBbva {
         }
         // Cerramos el navegador
         driver.close();
+        return cotizaciones;
     }
 
     public double[] getList() {
-        scrape();
-        return cotizaciones;
+        double[] lista = scrape();
+        return ordenarLista(lista);
+    }
+
+    public double[] ordenarLista(double[] listaDesordenada) {
+        // Esto es un horror, revisar mañana
+        double[] listaOrdenada = new double[8];
+
+        for (byte i = 0; i < 4; i++) {
+            listaOrdenada[i] = listaDesordenada[i];
+        }
+        listaOrdenada[4] = listaDesordenada[6];
+        listaOrdenada[5] = listaDesordenada[7];
+        listaOrdenada[6] = listaDesordenada[4];
+        listaOrdenada[7] = listaDesordenada[5];
+
+        return listaOrdenada;
     }
 }

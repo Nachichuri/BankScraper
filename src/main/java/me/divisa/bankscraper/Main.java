@@ -15,10 +15,15 @@ public class Main {
         WebDriverWait espera = new WebDriverWait(driver, 30);
 
         ScraperBbva bbva = new ScraperBbva(driver, espera);
+        ScraperCiudad ciudad = new ScraperCiudad(driver, espera);
 
         System.out.println("Cotizaciones BBVA:");
         System.out.println(Arrays.toString(bbva.getList()));
 
+        System.out.println("Cotizaciones Ciudad:");
+        System.out.println(Arrays.toString(ciudad.getList()));
+        //Cerramos el navegador
+        driver.close();
     }
 
 }

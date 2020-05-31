@@ -12,13 +12,13 @@ public class ScraperBbva implements Scraper {
 
     private final String TARGET_URL;
     private final WebDriver NAVEGADOR;
-    private final WebDriverWait espera;
+    private final WebDriverWait ESPERA;
 
     // Constructors
     public ScraperBbva(WebDriver driver, WebDriverWait wait) {
         this.TARGET_URL = "https://hb.bbv.com.ar/fnet/mod/inversiones/NL-dolareuro.jsp";
         this.NAVEGADOR = driver;
-        this.espera = wait;
+        this.ESPERA = wait;
     }
 
     // Interface overriding
@@ -34,7 +34,7 @@ public class ScraperBbva implements Scraper {
         NAVEGADOR.navigate().to(TARGET_URL);
 
         // Esperamos que renderice la tabla y la guardamos en una lista de objetos scrapeados
-        espera.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("table")));
+        ESPERA.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("table")));
         List<WebElement> tabla = NAVEGADOR.findElements(By.className("td2"));
 
         // Agregamos los valores scrapeados en la lista
@@ -44,7 +44,7 @@ public class ScraperBbva implements Scraper {
             count++;
         }
         // Cerramos el navegador
-        NAVEGADOR.close();
+
 
         return ordenarLista(cotizaciones);
     }

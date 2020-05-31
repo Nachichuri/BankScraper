@@ -14,7 +14,7 @@ public class ScraperBbva implements Scraper {
     private final WebDriver NAVEGADOR;
     private final WebDriverWait ESPERA;
 
-    // Constructors
+    // Constructor
     public ScraperBbva(WebDriver driver, WebDriverWait wait) {
         this.TARGET_URL = "https://hb.bbv.com.ar/fnet/mod/inversiones/NL-dolareuro.jsp";
         this.NAVEGADOR = driver;
@@ -27,7 +27,7 @@ public class ScraperBbva implements Scraper {
         return scrape();
     }
 
-    public double[] scrape() {
+    private double[] scrape() {
         byte count = 0;
         double[] cotizaciones = new double[8];
         // Let's go, es dificil armar un método para scrapear sin que quede tan procedural, pero bueno:
@@ -43,13 +43,11 @@ public class ScraperBbva implements Scraper {
             cotizaciones[count] = cotizacion;
             count++;
         }
-        // Cerramos el navegador
-
 
         return ordenarLista(cotizaciones);
     }
 
-    public double[] ordenarLista(double[] listaDesordenada) {
+    private double[] ordenarLista(double[] listaDesordenada) {
         // Esto es un horror, revisar
         double[] listaOrdenada = new double[8];
 

@@ -22,6 +22,7 @@ public class Main {
 
         System.out.println("Cotizaciones Ciudad:");
         System.out.println(Arrays.toString(ciudad.getList()));
+
         //Cerramos el navegador
         driver.close();
     }

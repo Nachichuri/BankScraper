@@ -15,7 +15,7 @@ public class ScraperCiudad implements Scraper {
     private final WebDriver NAVEGADOR;
     private final WebDriverWait ESPERA;
 
-    // Constructors
+    // Constructor
     public ScraperCiudad(WebDriver driver, WebDriverWait wait) {
         this.TARGET_URL = "https://www.bancociudad.com.ar/institucional/?herramienta=cotizaciones#";
         this.NAVEGADOR = driver;
@@ -32,7 +32,7 @@ public class ScraperCiudad implements Scraper {
         byte count = 0;
         double[] cotizaciones = new double[6];
 
-        // Let's go, es dificil armar un método para scrapear sin que quede tan procedural, pero bueno:
+        // Let's go
         NAVEGADOR.navigate().to(TARGET_URL);
 
         // Esperamos que renderice la tabla y la guardamos en una lista de objetos scrapeados
@@ -46,11 +46,8 @@ public class ScraperCiudad implements Scraper {
             cotizaciones[count+1] = Double.parseDouble(venta.substring(8).replace(",", "."));
             count+=2;
         }
-        // Cerramos el navegador
-
 
         return cotizaciones;
-
     }
 
 }

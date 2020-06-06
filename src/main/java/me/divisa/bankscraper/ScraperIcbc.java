@@ -50,6 +50,6 @@ public class ScraperIcbc implements Scraper {
         }
 
         // Creamos un stream con el ArrayList y devolvemos los valores en un double[]
-        return cotizaciones.stream().mapToDouble(d -> d).toArray();
+        return cotizaciones.stream().mapToDouble(Double::doubleValue).toArray();
     }
 }

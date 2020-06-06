@@ -2,12 +2,10 @@ package me.divisa.bankscraper;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 
 public class ScraperCiudad implements Scraper {
 
@@ -29,25 +27,33 @@ public class ScraperCiudad implements Scraper {
     }
 
     public double[] scrape() {
-        byte count = 0;
-        double[] cotizaciones = new double[6];
+        ArrayList<Double> cotizaciones = new ArrayList<>();
 
         // Let's go
         NAVEGADOR.navigate().to(TARGET_URL);
 
-        // Esperamos que renderice la tabla y la guardamos en una lista de objetos scrapeados
+        // Esperamos que renderice la tabla
         ESPERA.until(ExpectedConditions.visibilityOfElementLocated(By.className("herramientas_cotizaciones")));
-        List<WebElement> tabla = NAVEGADOR.findElements(By.className("cotizacion__valor"));
-        // Sacamos los primeros 3 WebElements que nos interesan y appendeamos compra y venta al array de cotizaciones
-        for (byte i = 0; i < 3; i++) {
-            String compra = tabla.get(i).findElement(By.className("cotizacion__valor--compra")).getText();
-            cotizaciones[count] = Double.parseDouble(compra.substring(9).replace(",", "."));
-            String venta = tabla.get(i).findElement(By.className("cotizacion__valor--venta")).getText();
-            cotizaciones[count+1] = Double.parseDouble(venta.substring(8).replace(",", "."));
-            count+=2;
-        }
 
-        return cotizaciones;
+        // El Ciudad tiene mucho nesting sin patrones específicos, vamos a buscar por ID
+        String[] idsAEncontrar = {
+                "cotizacion_dolar_compra",
+                "cotizacion_dolar_venta",
+                "cotizacion_euro_compra",
+                "cotizacion_euro_venta",
+                "cotizacion_real_compra",
+                "cotizacion_real_venta"
+        };
+
+        // Formateamos los valores de cada ID, los parseamos y los agregamos al ArrayList de cotizaciones
+        for (String id : idsAEncontrar)
+            cotizaciones.add(
+              Double.parseDouble(
+                      NAVEGADOR.findElement(By.id(id)).getText().substring(2).replace(",", ".")
+              ));
+
+        // Devolvemos el ArrayList como double[]
+        return cotizaciones.stream().mapToDouble(Double::doubleValue).toArray();
     }
 
 }

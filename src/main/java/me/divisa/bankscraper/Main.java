@@ -17,6 +17,7 @@ public class Main {
         ScraperBbva bbva = new ScraperBbva(driver, espera);
         ScraperCiudad ciudad = new ScraperCiudad(driver, espera);
         ScraperIcbc icbc = new ScraperIcbc(driver, espera);
+        Scraper nacion = new ScraperNacion(driver, espera);
 
         System.out.println("Cotizaciones BBVA:");
         System.out.println(Arrays.toString(bbva.getList()));
@@ -29,6 +30,9 @@ public class Main {
 
         System.out.println("Cotizaciones ICBC:");
         System.out.println(Arrays.toString(icbc.getList()));
+
+        System.out.println("Cotizaciones Nación:");
+        System.out.println(Arrays.toString(nacion.getList()));
 
         //Cerramos el navegador
         driver.close();

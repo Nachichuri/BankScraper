@@ -8,3 +8,4 @@ Baja el .jar, abrí una terminal, `cd` hasta donde esté descargado y corré:
 
 ### Requisitos
 * JRE 8+
+* Conexión a Internet :grimacing:

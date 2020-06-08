@@ -1,5 +1,6 @@
 package me.divisa.bankscraper;
 
+import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,6 +19,7 @@ public class Main {
         ScraperCiudad ciudad = new ScraperCiudad(driver, espera);
         ScraperIcbc icbc = new ScraperIcbc(driver, espera);
         Scraper nacion = new ScraperNacion(driver, espera);
+        Scraper patagonia = new ScraperPatagonia(driver, espera);
 
         System.out.println("Cotizaciones BBVA:");
         System.out.println(Arrays.toString(bbva.getList()));
@@ -33,6 +35,9 @@ public class Main {
 
         System.out.println("Cotizaciones Nación:");
         System.out.println(Arrays.toString(nacion.getList()));
+
+        System.out.println("Cotizaciones Patagonia:");
+        System.out.println(Arrays.toString(patagonia.getList()));
 
         //Cerramos el navegador
         driver.close();

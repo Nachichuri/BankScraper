@@ -15,11 +15,14 @@ public class Main {
         FirefoxDriver driver = new FirefoxDriver(opcionesFirefox);
         WebDriverWait espera = new WebDriverWait(driver, 30);
 
-        ScraperBbva bbva = new ScraperBbva(driver, espera);
-        ScraperCiudad ciudad = new ScraperCiudad(driver, espera);
-        ScraperIcbc icbc = new ScraperIcbc(driver, espera);
+        Scraper bbva = new ScraperBbva(driver, espera);
+        Scraper ciudad = new ScraperCiudad(driver, espera);
+        Scraper galicia = new ScraperGalicia(driver, espera);
+        Scraper icbc = new ScraperIcbc(driver, espera);
         Scraper nacion = new ScraperNacion(driver, espera);
         Scraper patagonia = new ScraperPatagonia(driver, espera);
+        Scraper provincia = new ScraperProvincia(driver, espera);
+        Scraper santander = new ScraperSantander(driver, espera);
 
         System.out.println("Cotizaciones BBVA:");
         System.out.println(Arrays.toString(bbva.getList()));
@@ -28,7 +31,7 @@ public class Main {
         System.out.println(Arrays.toString(ciudad.getList()));
 
         System.out.println("Cotizaciones Galicia:");
-        System.out.println("Falta hacer :(");
+        System.out.println(Arrays.toString(galicia.getList()));
 
         System.out.println("Cotizaciones ICBC:");
         System.out.println(Arrays.toString(icbc.getList()));
@@ -38,6 +41,12 @@ public class Main {
 
         System.out.println("Cotizaciones Patagonia:");
         System.out.println(Arrays.toString(patagonia.getList()));
+
+        System.out.println("Cotizaciones Provincia:");
+        System.out.println(Arrays.toString(provincia.getList()));
+
+        System.out.println("Cotizaciones Santander:");
+        System.out.println(Arrays.toString(santander.getList()));
 
         //Cerramos el navegador
         driver.close();
